@@ -1,2 +1,3 @@
-# fictional-octo-fortnight
-Keeps code base of C++ projetcs
+# Snake Game
+This is a little snake game for the ternimal written in C++
+

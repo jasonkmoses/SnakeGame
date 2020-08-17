@@ -1,4 +1,4 @@
-   //  snake game
+//  snake game
 //  Created by jason Moses on 2019/09/13.
 //  Copyright Â© 2019 jason Moses. All rights reserved.
 #include <iostream>
@@ -23,7 +23,7 @@ const int SIZE_OF_ARRAY = 20;
 const int SIZE_OF_NAME_ARRAY = 20;
 static int max = 80;
 static int min = 16;
-std::vector<bool> amountOfMoves(1000);
+std::vector<bool> amountOfMoves(100000);
 std::vector<int> numberOfmovesVertical(10000);
 std::vector<int> numberOfmovesHorizontal(10000);
 std::vector<int> storedRandomXValue(1000000);
@@ -31,8 +31,8 @@ std::vector<int> storedRandomYValue(100000);
 std::string name;
 std::ifstream ofile;
 int Inp;
-static std::string Names_To_Printed[SIZE_OF_NAME_ARRAY];
-static std::vector<std::string> head(SIZE_OF_ARRAY);
+std::string Names_To_Printed[SIZE_OF_NAME_ARRAY];
+std::vector<std::string> head(SIZE_OF_ARRAY);
 std::string NAMES[SIZE_OF_NAME_ARRAY];
 std::string scoreArray[SIZE_OF_NAME_ARRAY];
 static std::string fruit = "@";
@@ -45,12 +45,13 @@ std::cout<<"***********************************************\n";
 std::cout<<"\n";
 std::cout<<"***********************************************\n";
 std::cout<<"\n";
-std::cout<<"Full Stack Developer: Jason K Moses\n"; }
+std::cout<<"Developer: Jason K Moses\n"; }
 bool gameOVER;
 bool GameOver(){
 gameOVER = true;
 return gameOVER;}
 void Setup(int horzontial,int vertical){
+//Code in this function forms a cartesian plane where every point on the plane can be mapped with a if statement y and x.
 Fruitx = rand()%max;
 Fruity = rand()%min;
 double diff;
@@ -89,13 +90,14 @@ dir = STOP;
               std::cout<<head.at(0);}
               else if (x == Fruitx && y == Fruity) {
                 PRINTED_OR_NOT = true;
+                int n = amountOfMoves.size();
                 if (PRINTED_OR_NOT == true) { //Statement does not excute
                 // std::cout<<storedRandomXValue[0]<<std::endl;
                 std::cout<<fruit;
-                int n = amountOfMoves.size();}
-                // if (amountOfMoves[n-1] == true) {
-                //   std::cout<<fruit;}
-                // else {std::cout<<fruit;}
+                }
+                if (amountOfMoves[n-1] == true) {
+                  std::cout<<fruit;}
+                else {std::cout<<fruit;}
                 //This code will add to the array making the snake larger +++ ;) only when fruit is touched
                 for (int t=0;Fruitx==39+horzontial && Fruity==8+vertical;t++){
                    head[t] = "$";}}
@@ -112,7 +114,7 @@ dir = STOP;
                   (m==0)?STR=" "+names[m]+",":STR=","+names[m];
                   namesFile2Refrences>>STR;
                   std::string RecordNamesCorresponding[SIZE_OF_NAME_ARRAY];
-                  recordFile.open("/Users/jasonmoses/Desktop/C++/Records.txt",std::ios::app | std::ios::out);
+                  recordFile.open("YOUR PATH TO Records.txt",std::ios::app | std::ios::out);
                   RecordNamesCorresponding[m] = scoreArray[m] + " " + names[m];
                   recordFile << RecordNamesCorresponding[m];
                   recordFile.close();
@@ -125,6 +127,7 @@ dir = STOP;
     for (int l=0; l < width; l++) {
         std::cout<<"#";}}
 void Input(){
+//Just incase a user taps one of the input buttons twice
 std::string aaValue="aa";
 std::string ddValue="dd";
 std::string wwValue="ww";
@@ -142,6 +145,7 @@ for (int i = 0; (input == "a" || input==aaValue) && gameOVER == false; i++){
     else {amountOfMoves[i] = false;}
       Setup(accumulate(numberOfmovesVertical.begin(),numberOfmovesVertical.end(),0)+1
       ,accumulate(numberOfmovesHorizontal.begin(),numberOfmovesHorizontal.end(),0)-1);}
+      //moving downwards must move through a lopp almost when possible
 for (int i = 0; (input == "d" || input==ddValue) &&
     gameOVER == false; i++){
     numberOfmovesVertical[i] = +i;
@@ -152,6 +156,7 @@ for (int i = 0; (input == "d" || input==ddValue) &&
     else {amountOfMoves[i] = false;}
     Setup(accumulate(numberOfmovesVertical.begin(),numberOfmovesVertical.end(),0)-1
     ,accumulate(numberOfmovesHorizontal.begin(),numberOfmovesHorizontal.end(),0)-1);}
+    //moving leftwards must move through a lopp almost when possible
 for (int i = 0; (input == "s" || input==ssValue) &&
     gameOVER == false; i++){
     numberOfmovesHorizontal[i] = +i;
@@ -161,7 +166,8 @@ for (int i = 0; (input == "s" || input==ssValue) &&
     amountOfMoves[amountOfMoves.size() - 1] = true;}
     else {amountOfMoves[i] = false;}
     Setup(accumulate(numberOfmovesVertical.begin(),numberOfmovesVertical.end(),0)-1,
-    accumulate(numberOfmovesHorizontal.begin(),numberOfmovesHorizontal.end(),0)+1);}
+accumulate(numberOfmovesHorizontal.begin(),numberOfmovesHorizontal.end(),0)+1);}
+    //moving upwards must move through a lopp almost when possible
 for (int i = 0; (input == "w" || input==wwValue) &&
     gameOVER == false; i++){
     numberOfmovesHorizontal[i] = -i;
@@ -170,8 +176,9 @@ for (int i = 0; (input == "w" || input==wwValue) &&
     if (i == 5) {
     amountOfMoves[amountOfMoves.size() - 1] = true;}
     else {amountOfMoves[i] = false;}
-    Setup(accumulate(numberOfmovesVertical.begin(),numberOfmovesVertical.end(),0)-1,
-    accumulate(numberOfmovesHorizontal.begin(),numberOfmovesHorizontal.end(),0)-1);}
+    Setup(accumulate(numberOfmovesVertical.begin(),numberOfmovesVertical.end(),0)-1
+,accumulate(numberOfmovesHorizontal.begin(),numberOfmovesHorizontal.end(),0)-1);}
+    //No move
   for (int i = 0; input==""; i++) {
     std::cin>>input;
     std::cout<<"\a"<<std::endl;
@@ -212,8 +219,9 @@ switch(Inp){
   case 3:exit(0);break;
   case 4:loadCredits();break;}}
 int main(){
-    storedRandomXValue.push_back(Fruitx);
-    storedRandomYValue.push_back(Fruity);
+storedRandomXValue.push_back(Fruitx);
+storedRandomYValue.push_back(Fruity);
+std::cout << a;
 std::cout<<"Snake Game  ðŸ"<<std::endl;
 std::cout<<"Made by Jason Moses \n";
 std::cout<<"Created in C++ \n";

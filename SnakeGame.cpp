@@ -1,6 +1,11 @@
 //  snake game
 //  Created by jason Moses on 2019/09/13.
 //  Copyright Â© 2019 jason Moses. All rights reserved.
+
+//################################
+//CODE STILL UNDER CONSTRUCTION!!!!
+//################################
+
 #include <iostream>
 #include <random>
 #include <cstdlib>
